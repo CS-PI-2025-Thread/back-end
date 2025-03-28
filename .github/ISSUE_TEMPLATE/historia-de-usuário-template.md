@@ -7,19 +7,19 @@ assignees: ''
 
 ---
 
-### Título:
+### Épico:
 
-### Objetivo: 
-
-### Histórias de Usuário:
-- [ ]
+### Descrição: 
 
 ### Critérios de Aceitação:
 - [ ]
 
-### Métricas de Sucesso:
+### Tarefas:
+- [ ]
 
 ### Riscos:
 
+### Plano de Mitigação
+
 ### Contraparte Front-end:
-- [ ]
+-
