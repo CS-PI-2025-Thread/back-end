@@ -1,5 +1,6 @@
 package com.ifpr.thread.stilofit.models;
 
+import com.ifpr.thread.stilofit.models.enums.Status;
 import java.util.Date;
 
 import com.ifpr.thread.stilofit.models.enums.Gender;
@@ -51,6 +52,10 @@ public class Client {
     @NotBlank(message = "{validation.cpf.notblank}")
     @Size(min = 11, max = 11, message = "{validation.cpf.length}")
     private String cpf;
+
+    @Column(name="status")
+    @Enumerated
+    private Status status = Status.NO_CONTRACT;
 
     @Column(name="rg", nullable = false, unique=true, length = 9)
     @Size(min = 9, max = 9, message = "{validation.rg.length}")
