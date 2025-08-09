@@ -16,7 +16,7 @@ public class ClientService {
     public Client create(ClientRequestDTO clientRequestDTO) {
         Client client = new Client();
         client.setName(clientRequestDTO.getName());
-        client.setBirthDate(new java.sql.Date(clientRequestDTO.getBirthDate().getTime()));
+        client.setBirthDate(clientRequestDTO.getBirthDate());
         client.setGender(clientRequestDTO.getGender());
         client.setCpf(clientRequestDTO.getCpf());
         Client clientSave = clientRepository.save(client);

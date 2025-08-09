@@ -1,8 +1,9 @@
 package com.ifpr.thread.stilofit.dto;
 
 
-import java.util.Date;
+import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ifpr.thread.stilofit.models.enums.Gender;
 
 import lombok.Data;
@@ -11,7 +12,8 @@ import lombok.Data;
 public class ClientResponseDTO {
     private Long id;
     private String name;
-    private Date birthDate;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate birthDate;
     private Gender gender;
     private String cpf;
 }

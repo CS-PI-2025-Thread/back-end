@@ -1,6 +1,8 @@
 package com.ifpr.thread.stilofit.models;
 
 import com.ifpr.thread.stilofit.models.enums.Status;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 import com.ifpr.thread.stilofit.models.enums.Gender;
@@ -40,8 +42,7 @@ public class Client {
 
     @Column(name = "birth_date")
     @NotNull(message = "{validation.birth.notblank}")
-    @Temporal(TemporalType.DATE)
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @Column(name = "gender")
     @NotNull(message = "{validation.gender.notblank}")

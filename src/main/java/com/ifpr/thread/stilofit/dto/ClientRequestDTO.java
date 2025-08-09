@@ -1,9 +1,10 @@
 package com.ifpr.thread.stilofit.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ifpr.thread.stilofit.models.enums.Gender;
 
 import jakarta.validation.constraints.NotBlank;
@@ -16,7 +17,8 @@ public class ClientRequestDTO {
     @NotBlank(message = "{validation.name.notblank}")
     private String name;
     @NotNull(message = "{validation.birth.notblank}")
-    private Date birthDate;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate birthDate;
     @NotNull(message = "{validation.gender.notblank}")
     private Gender gender;
     @NotBlank(message = "{validation.cpf.notblank}")
