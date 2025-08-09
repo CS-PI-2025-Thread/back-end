@@ -18,50 +18,49 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-
 @Data
 @Entity
-@Table(name="clients")
+@Table(name = "clients")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="name")
+    @Column(name = "name")
     @NotBlank(message = "{validation.name.notblank}")
     private String name;
 
-    @Column(name="email", unique=true)
+    @Column(name = "email", unique = true)
     @Email(message = "{validation.email.valid}")
     private String email;
 
-    @Column(name="birth_date")
-    @NotBlank(message = "{validation.birth.notblank}")
+    @Column(name = "birth_date")
+    @NotNull(message = "{validation.birth.notblank}")
     @Temporal(TemporalType.DATE)
     private Date birthDate;
 
     @Column(name = "gender")
-    @NotBlank(message = "{validation.gender.notblank}")
+    @NotNull(message = "{validation.gender.notblank}")
     @Enumerated
     private Gender gender;
 
-    @Column(name = "cpf", nullable = false, unique = true, length = 11)
+    @Column(name = "cpf", nullable = false, unique = true, length = 14)
     @NotBlank(message = "{validation.cpf.notblank}")
-    @Size(min = 11, max = 11, message = "{validation.cpf.length}")
     private String cpf;
 
-    @Column(name="status")
+    @Column(name = "status")
     @Enumerated
     private Status status = Status.NO_CONTRACT;
 
-    @Column(name="rg", nullable = false, unique=true, length = 9)
+    @Column(name = "rg", unique = true, length = 9, nullable = true)
     @Size(min = 9, max = 9, message = "{validation.rg.length}")
     private String rg;
 
-    @Column(name= "marital_status")
+    @Column(name = "marital_status")
     @Enumerated
     private MaritalStatus maritalStatus;
 
@@ -69,60 +68,60 @@ public class Client {
     @Temporal(TemporalType.DATE)
     private Date medicalExamDueDate;
 
-    @Column(name="responsible_name")
+    @Column(name = "responsible_name")
     private String responsibleName;
 
-    @Column(name="responsible_cpf", nullable = false, unique = true, length = 11)
-    @Size(min = 11, max = 11, message = "{validation.cpf.length}")
+    @Column(name = "responsible_cpf", unique = true, length = 14)
+    @Size(min = 14, max = 14, message = "{validation.cpf.length}")
     private String responsibleCpf;
 
-    @Column(name="responsible_phone")
+    @Column(name = "responsible_phone")
     private String responsiblePhone;
 
-    @Column(name="emergencie_name")
+    @Column(name = "emergencie_name")
     private String emergencieName;
 
-    @Column(name="emergencie_phone")
+    @Column(name = "emergencie_phone")
     private String emergenciePhone;
-    
-    @Column(name="emergencie_obs", columnDefinition = "TEXT")
+
+    @Column(name = "emergencie_obs", columnDefinition = "TEXT")
     private String emergencieObs;
 
-    @Column(name="contact_email")
+    @Column(name = "contact_email")
     @Email(message = "{validation.email.valid}")
     private String contactEmail;
 
-    @Column(name="contact_phone")
+    @Column(name = "contact_phone")
     private String contactPhone;
 
-    @Column(name="residence_type")
+    @Column(name = "residence_type")
     @Enumerated
     private Residence residenceType;
 
-    @Column(name="cep")
+    @Column(name = "cep")
     private String cep;
 
-    @Column(name="address")
+    @Column(name = "address")
     private String address;
 
-    @Column(name="number")
+    @Column(name = "number")
     private String number;
 
-    @Column(name="complement")
+    @Column(name = "complement")
     private String complement;
 
-    @Column(name="neighborhood")
+    @Column(name = "neighborhood")
     private String neighborhood;
 
-    @Column(name="city")
+    @Column(name = "city")
     private String city;
 
-    @Column(name="state")
+    @Column(name = "state")
     private String state;
 
-    @Column(name="add_obs", columnDefinition = "TEXT")
+    @Column(name = "add_obs", columnDefinition = "TEXT")
     private String addObs;
 
-    @Column(name="consultant")
+    @Column(name = "consultant")
     private String consultant;
 }
