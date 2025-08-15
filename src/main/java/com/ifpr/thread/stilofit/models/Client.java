@@ -3,7 +3,6 @@ package com.ifpr.thread.stilofit.models;
 import com.ifpr.thread.stilofit.models.enums.Status;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import com.ifpr.thread.stilofit.models.enums.Gender;
 import com.ifpr.thread.stilofit.models.enums.MaritalStatus;
@@ -58,8 +57,7 @@ public class Client {
     @Enumerated(EnumType.STRING)
     private Status status = Status.NO_CONTRACT;
 
-    @Column(name = "rg", unique = true, length = 9, nullable = true)
-    @Size(min = 9, max = 9, message = "{validation.rg.length}")
+    @Column(name = "rg", unique = true,  nullable = true)
     private String rg;
 
     @Column(name = "marital_status")
@@ -68,7 +66,7 @@ public class Client {
 
     @Column(name = "medical_exam_due_date")
     @Temporal(TemporalType.DATE)
-    private Date medicalExamDueDate;
+    private LocalDate medicalExamDueDate;
 
     @Column(name = "responsible_name")
     private String responsibleName;
