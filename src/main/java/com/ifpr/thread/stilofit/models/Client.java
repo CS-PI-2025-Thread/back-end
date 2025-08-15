@@ -11,6 +11,7 @@ import com.ifpr.thread.stilofit.models.enums.Residence;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -46,7 +47,7 @@ public class Client {
 
     @Column(name = "gender")
     @NotNull(message = "{validation.gender.notblank}")
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @Column(name = "cpf", nullable = false, unique = true, length = 14)
@@ -54,7 +55,7 @@ public class Client {
     private String cpf;
 
     @Column(name = "status")
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Status status = Status.NO_CONTRACT;
 
     @Column(name = "rg", unique = true, length = 9, nullable = true)
@@ -62,7 +63,7 @@ public class Client {
     private String rg;
 
     @Column(name = "marital_status")
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private MaritalStatus maritalStatus;
 
     @Column(name = "medical_exam_due_date")
