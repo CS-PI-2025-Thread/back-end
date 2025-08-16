@@ -24,7 +24,7 @@ public class ClientRequestDTO {
     private Gender gender;
     @NotBlank(message = "{validation.cpf.notblank}")
     @Size(max = 14)
-    @CPF
+    @CPF(message = "{validation.cpf.valid}")
     private String cpf;
     @Email
     private String email;
@@ -35,7 +35,7 @@ public class ClientRequestDTO {
     private Status status = Status.NO_CONTRACT;
     private String responsibleName;
     @Size(max = 14)
-    @CPF
+    @CPF(message = "{validation.cpf.valid}")
     private String responsibleCpf;
     private String responsiblePhone;
     private String emergencieName;

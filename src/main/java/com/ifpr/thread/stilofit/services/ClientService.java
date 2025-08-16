@@ -1,5 +1,7 @@
 package com.ifpr.thread.stilofit.services;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.ifpr.thread.stilofit.dto.ClientRequestDTO;
@@ -51,5 +53,14 @@ public class ClientService {
         client.setConsultant(clientRequestDTO.getConsultant());
         Client clientSave = clientRepository.save(client);
         return clientSave;
+    }
+
+    public Client findById(Long id) {
+        return clientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Client not found with id: " + id));
+    }
+
+    public Page<Client> findAll(Pageable pageable) {
+        return clientRepository.findAll(pageable);
     }
 }
