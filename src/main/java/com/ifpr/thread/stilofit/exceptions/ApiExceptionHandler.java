@@ -14,16 +14,19 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ApiExceptionHandler {
 
         @ExceptionHandler(MethodArgumentNotValidException.class)
-        public ResponseEntity<ErrorMessage> handleMethodArgumentNotValid(
+        public ResponseEntity<ErrorMessage> handleValidation(
                         MethodArgumentNotValidException ex,
                         HttpServletRequest request) {
 
-                log.error("Erro de validação:{}", ex.getMessage());
-                ErrorMessage error = new ErrorMessage(
-                                request,
-                                HttpStatus.UNPROCESSABLE_ENTITY,
-                                "Ocorreu um erro de validação");
-                return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(error);
+                String message = ex.getBindingResult()
+                                .getFieldErrors()
+                                .stream()
+                                .map(err -> err.getField() + ": " + err.getDefaultMessage())
+                                .findFirst()
+                                .orElse("Erro de validação");
+
+                ErrorMessage error = new ErrorMessage(request, HttpStatus.BAD_REQUEST, message);
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
         }
 
         @ExceptionHandler(CpfAlreadyRegisteredException.class)
