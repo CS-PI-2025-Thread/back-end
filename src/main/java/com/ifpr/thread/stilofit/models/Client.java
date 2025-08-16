@@ -55,7 +55,7 @@ public class Client {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private Status status = Status.NO_CONTRACT;
+    private Status status = Status.SEM_CONTRATO;
 
     @Column(name = "rg", unique = true,  nullable = true)
     private String rg;

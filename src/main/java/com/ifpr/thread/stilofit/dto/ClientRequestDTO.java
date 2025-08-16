@@ -32,7 +32,7 @@ public class ClientRequestDTO {
     private MaritalStatus maritalStatus;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate medicalExamDueDate;
-    private Status status = Status.NO_CONTRACT;
+    private Status status = Status.SEM_CONTRATO;
     private String responsibleName;
     @Size(max = 14)
     @CPF(message = "{validation.cpf.valid}")
