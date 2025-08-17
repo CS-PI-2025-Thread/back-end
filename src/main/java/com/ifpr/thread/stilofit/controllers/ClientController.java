@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 
+import com.ifpr.thread.stilofit.dto.ClientListDTO;
 import com.ifpr.thread.stilofit.dto.ClientRequestDTO;
 import com.ifpr.thread.stilofit.dto.ClientResponseDTO;
 import com.ifpr.thread.stilofit.dto.mapper.ClientMapper;
@@ -65,10 +66,10 @@ public class ClientController {
         @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
     })
     @GetMapping("/list-all-clients")
-    public ResponseEntity<List<ClientResponseDTO>> findAll(@PageableDefault(size = 30, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
+    public ResponseEntity<List<ClientListDTO>> findAll(@PageableDefault(size = 30, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
         Page<Client> clients = clientService.findAll(pageable);
-        List<ClientResponseDTO> clientResponses = clients.getContent().stream()
-                .map(ClientMapper::toResponse)
+        List<ClientListDTO> clientResponses = clients.getContent().stream()
+                .map(ClientMapper::toList)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(clientResponses);
     }
