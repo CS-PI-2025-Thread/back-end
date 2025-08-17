@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -66,11 +63,9 @@ public class ClientController {
         @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
     })
     @GetMapping("/list-all-clients")
-    public ResponseEntity<List<ClientListDTO>> findAll(@PageableDefault(size = 30, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
+    public ResponseEntity<Page<ClientListDTO>> findAll(@PageableDefault(size = 30, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
         Page<Client> clients = clientService.findAll(pageable);
-        List<ClientListDTO> clientResponses = clients.getContent().stream()
-                .map(ClientMapper::toList)
-                .collect(Collectors.toList());
+        Page<ClientListDTO> clientResponses = clients.map(ClientMapper::toList);
         return ResponseEntity.ok(clientResponses);
     }
 
