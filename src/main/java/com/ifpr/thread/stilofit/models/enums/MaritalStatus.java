@@ -1,9 +1,9 @@
 package com.ifpr.thread.stilofit.models.enums;
 
 public enum MaritalStatus {
-    SINGLE,
-    MARRIED,
-    DIVORCED,
-    WIDOWED,
-    SEPARATED
+    SOLTEIRO,
+    CASADO,
+    DIVORCIADO,
+    VIÚVO,
+    SEPARADO
 }
