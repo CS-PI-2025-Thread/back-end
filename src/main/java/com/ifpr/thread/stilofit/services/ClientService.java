@@ -58,7 +58,7 @@ public class ClientService {
 
     public Client findById(Long id) {
         return clientRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado com id: "+ id));
+                .orElseThrow(() -> new NotFoundException("Cliente não encontrado com id: "+ id));
     }
 
     public Page<Client> findAll(Pageable pageable) {
@@ -70,7 +70,6 @@ public class ClientService {
         existClient.setName(clientRequestDTO.getName());
         existClient.setBirthDate(clientRequestDTO.getBirthDate());
         existClient.setGender(clientRequestDTO.getGender());
-        existClient.setCpf(clientRequestDTO.getCpf());
         existClient.setRg(clientRequestDTO.getRg());
         existClient.setEmail(clientRequestDTO.getEmail());
         existClient.setMaritalStatus(clientRequestDTO.getMaritalStatus());
