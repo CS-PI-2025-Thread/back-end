@@ -41,4 +41,30 @@ public class ApiExceptionHandler {
                                 ex.getMessage());
                 return new ResponseEntity<>(error, HttpStatus.CONFLICT);
         }
+
+       @ExceptionHandler(NotFoundException.class)
+        public ResponseEntity<ErrorMessage> handleNotFoundException(
+                        NotFoundException ex,
+                        HttpServletRequest request) {
+
+                log.error("Não encontrado: {}", ex.getMessage());
+                ErrorMessage error = new ErrorMessage(
+                                request,
+                                HttpStatus.NOT_FOUND,
+                                ex.getMessage());
+                return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        }
+
+        @ExceptionHandler(NotBlankException.class)
+        public ResponseEntity<ErrorMessage> handleNotBlankException(
+                        NotBlankException ex,
+                        HttpServletRequest request) {
+
+                log.error("Não pode ser nulo: {}", ex.getMessage());
+                ErrorMessage error = new ErrorMessage(
+                                request,
+                                HttpStatus.BAD_REQUEST,
+                                ex.getMessage());
+                return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        }
 }
