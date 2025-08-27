@@ -19,6 +19,7 @@ public class ClientService {
     private final ClientRepository clientRepository;
 
     public Client create(ClientRequestDTO clientRequestDTO) {
+        validateClientFields(clientRequestDTO);
         if (clientRepository.existsByCpf(clientRequestDTO.getCpf())) {
             throw new CpfAlreadyRegisteredException("CPF já cadastrado");
         }
