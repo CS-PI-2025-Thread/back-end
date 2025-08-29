@@ -17,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.ifpr.thread.stilofit.dto.ClientRequestDTO;
 import com.ifpr.thread.stilofit.exceptions.CpfAlreadyRegisteredException;
 import com.ifpr.thread.stilofit.exceptions.NotBlankException;
+import com.ifpr.thread.stilofit.exceptions.NotFoundException;
 import com.ifpr.thread.stilofit.models.Client;
 import com.ifpr.thread.stilofit.models.enums.Gender;
 import com.ifpr.thread.stilofit.repositories.ClientRepository;
