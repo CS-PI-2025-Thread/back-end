@@ -37,7 +37,7 @@ class ClientServiceTest {
     @Test
     void create_shouldThrowExceptionWhenCpfAlreadyExists() {
         ClientRequestDTO clientRequestDTO = new ClientRequestDTO();
-        clientRequestDTO.setName("John Doe");
+        clientRequestDTO.setName("João da Silva");
         clientRequestDTO.setBirthDate(LocalDate.of(2000, 1, 1));
         clientRequestDTO.setGender(Gender.MASCULINO);
         clientRequestDTO.setCpf("123.456.789-00");
@@ -55,7 +55,7 @@ class ClientServiceTest {
     @Test
     void create_shouldThrowExceptionWhenBirthDateIsNull() {
         ClientRequestDTO clientRequestDTO = new ClientRequestDTO();
-        clientRequestDTO.setName("John Doe");
+        clientRequestDTO.setName("João da Silva");
         clientRequestDTO.setBirthDate(null);
         assertThrows(NotBlankException.class, () -> clientService.create(clientRequestDTO));
     }
@@ -63,7 +63,7 @@ class ClientServiceTest {
     @Test
     void create_shouldThrowExceptionWhenGenderIsNull() {
         ClientRequestDTO clientRequestDTO = new ClientRequestDTO();
-        clientRequestDTO.setName("John Doe");
+        clientRequestDTO.setName("João da Silva");
         clientRequestDTO.setBirthDate(LocalDate.of(2000, 1, 1));
         clientRequestDTO.setGender(null);
         assertThrows(NotBlankException.class, () -> clientService.create(clientRequestDTO));
@@ -75,31 +75,23 @@ class ClientServiceTest {
         Client client = new Client();
         client.setId(id);
         client.setName("João da Silva");
-
         when(clientRepository.findById(id)).thenReturn(Optional.of(client));
-
         Client foundClient = clientService.findById(id);
-
         assertNotNull(foundClient);
         assertEquals(id, foundClient.getId());
-
         verify(clientRepository, times(1)).findById(id);
     }
 
     @Test
     void findById_shouldThrowNotFoundException() {
         Long id = 99L;
-
         when(clientRepository.findById(id)).thenReturn(Optional.empty());
-
         NotFoundException thrown = assertThrows(
                 NotFoundException.class,
                 () -> clientService.findById(id),
                 "A exceção NotFoundException deveria ter sido lançada"
         );
-
         assertTrue(thrown.getMessage().contains("Cliente não encontrado"));
-
         verify(clientRepository, times(1)).findById(id);
     }
 }
