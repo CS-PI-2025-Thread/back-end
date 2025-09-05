@@ -32,6 +32,7 @@ import lombok.AllArgsConstructor;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/clients")
+@CrossOrigin("http://localhost:5173")
 public class ClientController {
     private final ClientService clientService;
 
