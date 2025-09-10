@@ -1,0 +1,93 @@
+@startuml
+enum ContractStatus{
+    Em venda, cancelado
+}
+
+enum ClientStatus{
+    Ativo, Bloqueado, Cancelado, Em lincença, Sem contrato
+}
+
+class Employee {
+    - id: int
+    - name: String
+    - role: String
+    - email: String
+    - password: String
+}
+
+class Client {
+    - id: int
+    - name: String 
+    - email: String 
+    - status: ClientStatus
+    - consultant: Employee
+}
+
+class CashRegister {
+    - id: int
+    - openingDateTime: DateTime
+    - closingDateTime: DateTime
+    - openedBy: Employee
+}
+
+class CashTransaction {
+    - id: int
+    - date: DateTime
+    - type: String  // "IN" or "OUT"
+    - amount: double
+    - description: String
+}
+
+class Sale {
+    - id: int
+    - date: DateTime
+    - totalAmount: double
+}
+
+class Product {
+    - id: int
+    - name: String
+    - price: double
+}
+
+class Service {
+    - id: int
+    - name: String
+    - price: double
+}
+
+class ClassSchedule {
+    - id: int
+    - className: String
+    - dateTime: DateTime
+    - instructor: Employee
+}
+
+class Contract {
+    - id: int
+    - name: String 
+    - status: ContractStatus
+}
+
+class Turma {
+    - id: int
+    - name: String
+    - description: String
+    - maxStudents: int
+    - currentStudents: int
+}
+
+' Relationships
+Employee "1" -- "0..*" CashRegister : opens >
+CashRegister "1" -- "0..*" CashTransaction
+Sale "1" -- "1" CashTransaction : performs >
+Employee "1" -- "0..*" Sale : makes >
+Sale "1" -- "0..*" Product
+Sale "1" -- "0..*" Service
+Sale "1" -- "0..*" Contract
+Sale "1" -- "1" Client : for >
+Employee "1" -- "0..*" ClassSchedule : teaches >
+Contract "1" -- "0..*" Turma
+ClassSchedule "1" -- "0..*" Turma
+
+@enduml
