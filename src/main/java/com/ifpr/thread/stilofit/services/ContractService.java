@@ -28,6 +28,12 @@ public class ContractService {
         return mapper.toDTO(contract);
     }
 
+    public List<ContractResponseDTO> listAllPaged(int page, int size) {
+        return repository.findAllByOrderByNameAsc(org.springframework.data.domain.PageRequest.of(page, size)).stream()
+                .map(mapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
     public List<ContractResponseDTO> listAll() {
         return repository.findAll().stream()
                 .map(mapper::toDTO)
