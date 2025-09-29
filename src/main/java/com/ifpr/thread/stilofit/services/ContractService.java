@@ -1,5 +1,10 @@
 package com.ifpr.thread.stilofit.services;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.ifpr.thread.stilofit.dto.ContractRequestDTO;
 import com.ifpr.thread.stilofit.dto.ContractResponseDTO;
 import com.ifpr.thread.stilofit.dto.mapper.ContractMapper;
@@ -7,11 +12,8 @@ import com.ifpr.thread.stilofit.exceptions.ContractNameAlreadyExistsException;
 import com.ifpr.thread.stilofit.exceptions.NotFoundException;
 import com.ifpr.thread.stilofit.models.Contract;
 import com.ifpr.thread.stilofit.repositories.ContractRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +45,10 @@ public class ContractService {
     public ContractResponseDTO update(Long id, ContractRequestDTO dto) {
         Contract contract = repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Contrato não encontrado"));
+        
+        if (!contract.getName().equals(dto.getName()) && repository.existsByName(dto.getName())) {
+            throw new ContractNameAlreadyExistsException("Já existe um contrato com esse nome.");
+        }
         Contract updated = mapper.toEntity(dto);
         updated.setId(id);
         updated = repository.save(updated);
