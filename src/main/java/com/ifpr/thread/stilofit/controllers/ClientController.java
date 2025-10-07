@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -68,6 +69,18 @@ public class ClientController {
     @GetMapping("/list-all-clients")
     public ResponseEntity<Page<ClientListDTO>> findAll(@PageableDefault(size = 30, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
         Page<Client> clients = clientService.findAll(pageable);
+        Page<ClientListDTO> clientResponses = clients.map(ClientMapper::toList);
+        return ResponseEntity.ok(clientResponses);
+    }
+
+    @Operation(summary = "Find clients by name", description = "Retrieves a paginated list of clients by name.", responses = {
+        @ApiResponse(responseCode = "200", description = "Clients found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ClientResponseDTO.class))),
+        @ApiResponse(responseCode = "404", description = "No clients found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
+        @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
+    })
+    @GetMapping("/list-clients-by-name")
+    public ResponseEntity<Page<ClientListDTO>> findByName(@PageableDefault(size = 30, sort = "name", direction = Sort.Direction.ASC) Pageable pageable, @RequestParam(name = "name", required = false, defaultValue = "") String name) {
+        Page<Client> clients = clientService.findByName(pageable, name);
         Page<ClientListDTO> clientResponses = clients.map(ClientMapper::toList);
         return ResponseEntity.ok(clientResponses);
     }

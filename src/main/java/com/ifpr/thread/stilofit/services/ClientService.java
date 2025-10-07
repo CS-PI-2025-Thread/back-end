@@ -67,6 +67,10 @@ public class ClientService {
         return clientRepository.findAll(pageable);
     }
 
+    public Page<Client> findByName(Pageable pageable, String name) {
+        return clientRepository.findByName(pageable, name);
+    }
+
     public Client update(Long id, ClientRequestDTO clientRequestDTO) {
         validateClientFields(clientRequestDTO);
         Client existClient = clientRepository.findById(id)
