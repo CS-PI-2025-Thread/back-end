@@ -109,7 +109,7 @@ public class ClientService {
             throw new NotBlankException("O campo 'nome' é obrigatório.");
         }
         if (clientRequestDTO.getBirthDate() == null) {
-            throw new NotBlankException("O campo 'data de nascimentp' é obrigatório.");
+            throw new NotBlankException("O campo 'data de nascimento' é obrigatório.");
         }
         if (clientRequestDTO.getGender() == null) {
             throw new NotBlankException("O campo 'gênero' é obrigatório.");

@@ -15,6 +15,14 @@ import com.ifpr.thread.stilofit.repositories.ContractRepository;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springdoc.core.converters.models.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
+
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ContractService {
@@ -62,4 +70,11 @@ public class ContractService {
         repository.deleteById(id);
     }
 
+     public Page<Contract> findAll(Pageable pageable) {
+        return ContractRepository.findAll(pageable);
+    }
+
+    public Page<Contract> findByName(Pageable pageable, String name) {
+        return ContractRepository.findByName(pageable, name);
+    }
 }
