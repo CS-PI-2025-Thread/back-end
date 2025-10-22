@@ -3,7 +3,11 @@ package com.ifpr.thread.stilofit.dto.mapper;
 import com.ifpr.thread.stilofit.dto.ContractRequestDTO;
 import com.ifpr.thread.stilofit.dto.ContractResponseDTO;
 import com.ifpr.thread.stilofit.models.Contract;
+import static com.ifpr.thread.stilofit.utils.WeekDaysUtils.*;
+
 import org.springframework.stereotype.Component;
+
+import com.ifpr.thread.stilofit.dto.list.ContractListDTO;
 
 @Component
 public class ContractMapper {
@@ -44,41 +48,11 @@ public class ContractMapper {
         return dto;
     }
 
-    private com.ifpr.thread.stilofit.models.WeekDays mapWeekDaysFromArray(String[] weekdays) {
-        com.ifpr.thread.stilofit.models.WeekDays weekDays = new com.ifpr.thread.stilofit.models.WeekDays();
-        if (weekdays != null) {
-            for (String day : weekdays) {
-                switch (day.toLowerCase()) {
-                    case "monday":
-                        weekDays.setMonday(true); break;
-                    case "tuesday":
-                        weekDays.setTuesday(true); break;
-                    case "wednesday":
-                        weekDays.setWednesday(true); break;
-                    case "thursday":
-                        weekDays.setThursday(true); break;
-                    case "friday":
-                        weekDays.setFriday(true); break;
-                    case "saturday":
-                        weekDays.setSaturday(true); break;
-                    case "sunday":
-                        weekDays.setSunday(true); break;
-                }
-            }
-        }
-        return weekDays;
-    }
-
-    private String[] mapWeekDaysToArray(com.ifpr.thread.stilofit.models.WeekDays weekDays) {
-        if (weekDays == null) return new String[0];
-        java.util.List<String> days = new java.util.ArrayList<>();
-        if (weekDays.isMonday()) days.add("monday");
-        if (weekDays.isTuesday()) days.add("tuesday");
-        if (weekDays.isWednesday()) days.add("wednesday");
-        if (weekDays.isThursday()) days.add("thursday");
-        if (weekDays.isFriday()) days.add("friday");
-        if (weekDays.isSaturday()) days.add("saturday");
-        if (weekDays.isSunday()) days.add("sunday");
-        return days.toArray(new String[0]);
+        public ContractListDTO toList(Contract contract) {
+        ContractListDTO dto = new ContractListDTO();
+        dto.setId(contract.getId());
+        dto.setName(contract.getName());
+        dto.setTotalValue(contract.getTotalValue());
+        return dto;
     }
 }
