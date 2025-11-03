@@ -1,17 +1,10 @@
 package com.ifpr.thread.stilofit.dto.list;
 
-import com.ifpr.thread.stilofit.models.enums.DiscountType;
-
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class PromotionListDTO {
-    private Long id;
-    private String name;
-    @Enumerated(EnumType.STRING)
-    private DiscountType discountType;
-    private Double value;
-    private Integer timesApplied;
+@EqualsAndHashCode(callSuper = true)
+public class PromotionListDTO extends DiscountListDTO {
+    
 }
