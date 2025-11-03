@@ -1,11 +1,8 @@
 package com.ifpr.thread.stilofit.dto.mapper;
 
-import com.ifpr.thread.stilofit.models.WeekDays;
 import com.ifpr.thread.stilofit.dto.ContractRequestDTO;
 import com.ifpr.thread.stilofit.dto.ContractResponseDTO;
 import com.ifpr.thread.stilofit.models.Contract;
-
-import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -14,21 +11,21 @@ import com.ifpr.thread.stilofit.dto.list.ContractListDTO;
 @Component
 public class ContractMapper {
     public Contract toEntity(ContractRequestDTO dto) {
-        return Contract.builder()
-                .name(dto.getName())
-                .status(dto.getStatus())
-                .template(dto.getTemplate())
-                .installmentable(dto.getInstallmentable())
-                .installments(dto.getInstallments())
-                .totalValue(dto.getTotalValue())
-                .installmentsValue(dto.getInstallmentsValue())
-                .expire(dto.getExpire())
-                .typeExpire(dto.getTypeExpire())
-                .classRoms(dto.getClassRoms())
-                .timeMin(dto.getTimeMin())
-                .timeMax(dto.getTimeMax())
-                .weekDays(mapWeekDaysFromArray(dto.getWeekdays()))
-                .build();
+        Contract contract = new Contract();
+        contract.setName(dto.getName());
+        contract.setStatus(dto.getStatus());
+        contract.setTemplate(dto.getTemplate());
+        contract.setInstallmentable(dto.getInstallmentable());
+        contract.setInstallments(dto.getInstallments());
+        contract.setTotalValue(dto.getTotalValue());
+        contract.setInstallmentsValue(dto.getInstallmentsValue());
+        contract.setExpire(dto.getExpire());
+        contract.setTypeExpire(dto.getTypeExpire());
+        contract.setClassRoms(dto.getClassRoms());
+        contract.setTimeMin(dto.getTimeMin());
+        contract.setTimeMax(dto.getTimeMax());
+        contract.setWeekdays(dto.getWeekdays());
+        return contract;
     }
 
     public ContractResponseDTO toDTO(Contract contract) {
@@ -46,46 +43,8 @@ public class ContractMapper {
         dto.setClassRoms(contract.getClassRoms());
         dto.setTimeMin(contract.getTimeMin());
         dto.setTimeMax(contract.getTimeMax());
-        dto.setWeekdays(mapWeekDaysToArray(contract.getWeekDays()));
+        dto.setWeekdays(contract.getWeekdays() == null ? null : contract.getWeekdays().toArray(new String[0]));
         return dto;
-    }
-
-    private WeekDays mapWeekDaysFromArray(List<String> weekdays) {
-        WeekDays weekDays = new  WeekDays();
-        if (weekdays != null) {
-            for (String day : weekdays) {
-                switch (day.toLowerCase()) {
-                    case "monday":
-                        weekDays.setMonday(true); break;
-                    case "tuesday":
-                        weekDays.setTuesday(true); break;
-                    case "wednesday":
-                        weekDays.setWednesday(true); break;
-                    case "thursday":
-                        weekDays.setThursday(true); break;
-                    case "friday":
-                        weekDays.setFriday(true); break;
-                    case "saturday":
-                        weekDays.setSaturday(true); break;
-                    case "sunday":
-                        weekDays.setSunday(true); break;
-                }
-            }
-        }
-        return weekDays;
-    }
-
-    private String[] mapWeekDaysToArray(com.ifpr.thread.stilofit.models.WeekDays weekDays) {
-        if (weekDays == null) return new String[0];
-        java.util.List<String> days = new java.util.ArrayList<>();
-        if (weekDays.isMonday()) days.add("monday");
-        if (weekDays.isTuesday()) days.add("tuesday");
-        if (weekDays.isWednesday()) days.add("wednesday");
-        if (weekDays.isThursday()) days.add("thursday");
-        if (weekDays.isFriday()) days.add("friday");
-        if (weekDays.isSaturday()) days.add("saturday");
-        if (weekDays.isSunday()) days.add("sunday");
-        return days.toArray(new String[0]);
     }
 
         public ContractListDTO toList(Contract contract) {
