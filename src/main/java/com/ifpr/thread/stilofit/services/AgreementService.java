@@ -31,7 +31,7 @@ public class AgreementService {
 
     public Agreement findById(Long id) {
         return agreementRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Promoção não encontrada com id: " + id));
+                .orElseThrow(() -> new NotFoundException("Convênio não encontrado com id: " + id));
     }
 
     public Page<Agreement> findAll(Pageable pageable) {
@@ -44,7 +44,7 @@ public class AgreementService {
 
     public Agreement update(Long id, AgreementRequestDTO agreementRequestDTO) {
         Agreement existAgreement = agreementRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Promoção não encontrada com id: " + id));
+                .orElseThrow(() -> new NotFoundException("Convênio não encontrado com id: " + id));
         existAgreement.setName(agreementRequestDTO.getName());
         existAgreement.setDescription(agreementRequestDTO.getDescription());
         existAgreement.setDiscountType(agreementRequestDTO.getDiscountType());
