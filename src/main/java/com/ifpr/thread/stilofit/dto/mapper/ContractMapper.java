@@ -3,7 +3,6 @@ package com.ifpr.thread.stilofit.dto.mapper;
 import com.ifpr.thread.stilofit.dto.ContractRequestDTO;
 import com.ifpr.thread.stilofit.dto.ContractResponseDTO;
 import com.ifpr.thread.stilofit.models.Contract;
-import static com.ifpr.thread.stilofit.utils.WeekDaysUtils.*;
 
 import org.springframework.stereotype.Component;
 
@@ -12,21 +11,21 @@ import com.ifpr.thread.stilofit.dto.list.ContractListDTO;
 @Component
 public class ContractMapper {
     public Contract toEntity(ContractRequestDTO dto) {
-        return Contract.builder()
-                .name(dto.getName())
-                .status(dto.getStatus())
-                .template(dto.getTemplate())
-                .installmentable(dto.getInstallmentable())
-                .installments(dto.getInstallments())
-                .totalValue(dto.getTotalValue())
-                .installmentsValue(dto.getInstallmentsValue())
-                .expire(dto.getExpire())
-                .typeExpire(dto.getTypeExpire())
-                .classRoms(dto.getClassRoms())
-                .timeMin(dto.getTimeMin())
-                .timeMax(dto.getTimeMax())
-                .weekDays(mapWeekDaysFromArray(dto.getWeekdays()))
-                .build();
+        Contract contract = new Contract();
+        contract.setName(dto.getName());
+        contract.setStatus(dto.getStatus());
+        contract.setTemplate(dto.getTemplate());
+        contract.setInstallmentable(dto.getInstallmentable());
+        contract.setInstallments(dto.getInstallments());
+        contract.setTotalValue(dto.getTotalValue());
+        contract.setInstallmentsValue(dto.getInstallmentsValue());
+        contract.setExpire(dto.getExpire());
+        contract.setTypeExpire(dto.getTypeExpire());
+        contract.setClassRoms(dto.getClassRoms());
+        contract.setTimeMin(dto.getTimeMin());
+        contract.setTimeMax(dto.getTimeMax());
+        contract.setWeekdays(dto.getWeekdays());
+        return contract;
     }
 
     public ContractResponseDTO toDTO(Contract contract) {
@@ -44,7 +43,7 @@ public class ContractMapper {
         dto.setClassRoms(contract.getClassRoms());
         dto.setTimeMin(contract.getTimeMin());
         dto.setTimeMax(contract.getTimeMax());
-        dto.setWeekdays(mapWeekDaysToArray(contract.getWeekDays()));
+        dto.setWeekdays(contract.getWeekdays() == null ? null : contract.getWeekdays().toArray(new String[0]));
         return dto;
     }
 

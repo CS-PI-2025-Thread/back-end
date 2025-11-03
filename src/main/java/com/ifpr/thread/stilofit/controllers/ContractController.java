@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/contracts")
 @AllArgsConstructor
+@RequestMapping("/api/contracts")
 public class ContractController {
     private final ContractService service;
 
