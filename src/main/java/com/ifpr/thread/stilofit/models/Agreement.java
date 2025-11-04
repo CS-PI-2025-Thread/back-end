@@ -31,6 +31,7 @@ public class Agreement extends Discount {
     private Integer partnersMinimum;
 
     @Column(name = "agreement_status")
+    @NotNull(message = "{validation.agreementStatus.notnull}")
     @Enumerated(EnumType.STRING)
     private AgreementStatus agreementStatus = AgreementStatus.INACTIVE;
 
