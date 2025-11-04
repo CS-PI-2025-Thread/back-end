@@ -25,7 +25,9 @@ public class AgreementService {
         agreement.setValue(agreementRequestDTO.getValue());
         agreement.setTimesApplied(agreementRequestDTO.getTimesApplied());
         agreement.setPartnersMinimum(agreementRequestDTO.getPartnersMinimum());
-        agreement.setAgreementStatus(agreementRequestDTO.getAgreementStatus());
+        if (agreementRequestDTO.getAgreementStatus() != null) {
+            agreement.setAgreementStatus(agreementRequestDTO.getAgreementStatus());
+        }
         Agreement agreementSave = agreementRepository.save(agreement);
         return agreementSave;
     }
