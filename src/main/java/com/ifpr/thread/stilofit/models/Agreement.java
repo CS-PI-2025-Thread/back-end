@@ -1,7 +1,11 @@
 package com.ifpr.thread.stilofit.models;
 
+import com.ifpr.thread.stilofit.models.enums.AgreementStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,5 +29,9 @@ public class Agreement extends Discount {
     @NotNull(message = "{validation.partnersMinimum.notnull}")
     @Positive(message = "{validation.partnersMinimum.positive}")
     private Integer partnersMinimum;
+
+    @Column(name = "agreement_status")
+    @Enumerated(EnumType.STRING)
+    private AgreementStatus agreementStatus = AgreementStatus.INACTIVE;
 
 }

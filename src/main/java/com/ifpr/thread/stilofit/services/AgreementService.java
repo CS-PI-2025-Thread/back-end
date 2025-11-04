@@ -25,6 +25,7 @@ public class AgreementService {
         agreement.setValue(agreementRequestDTO.getValue());
         agreement.setTimesApplied(agreementRequestDTO.getTimesApplied());
         agreement.setPartnersMinimum(agreementRequestDTO.getPartnersMinimum());
+        agreement.setAgreementStatus(agreementRequestDTO.getAgreementStatus());
         Agreement agreementSave = agreementRepository.save(agreement);
         return agreementSave;
     }
@@ -51,6 +52,7 @@ public class AgreementService {
         existAgreement.setValue(agreementRequestDTO.getValue());
         existAgreement.setTimesApplied(agreementRequestDTO.getTimesApplied());
         existAgreement.setPartnersMinimum(agreementRequestDTO.getPartnersMinimum());
+        existAgreement.setAgreementStatus(agreementRequestDTO.getAgreementStatus());
         Agreement updateAgreement = agreementRepository.save(existAgreement);
         return updateAgreement;
     }
