@@ -64,4 +64,34 @@ public class EmployeeService {
     public Page<Employee> findAll(Pageable pageable) {
         return employeeRepository.findAll(pageable);
     }
+
+    public Employee update(Long id, EmployeeRequestDTO employeeRequestDTO) {
+        Employee existEmployee = employeeRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Funcionário não encontrado com id: " + id));
+        existEmployee.setName(employeeRequestDTO.getName());
+        existEmployee.setEmail(employeeRequestDTO.getEmail());
+        existEmployee.setPassword(passwordEncoder.encode(employeeRequestDTO.getPassword()));
+        existEmployee.setBirthDate(employeeRequestDTO.getBirthDate());
+        existEmployee.setGender(employeeRequestDTO.getGender());
+        existEmployee.setMaritalStatus(employeeRequestDTO.getMaritalStatus());
+        existEmployee.setCpf(employeeRequestDTO.getCpf());
+        existEmployee.setRg(employeeRequestDTO.getRg());
+        existEmployee.setProfessionalRegister(employeeRequestDTO.getProfessionalRegister());
+        existEmployee.setGuardianPhone(employeeRequestDTO.getGuardianPhone());
+        existEmployee.setCellphone(employeeRequestDTO.getCellphone());
+        existEmployee.setRole(employeeRequestDTO.getRole());
+        existEmployee.setStatus(employeeRequestDTO.getStatus());
+        existEmployee.setCep(employeeRequestDTO.getCep());
+        existEmployee.setAddress(employeeRequestDTO.getAddress());
+        existEmployee.setDistrict(employeeRequestDTO.getDistrict());
+        existEmployee.setCity(employeeRequestDTO.getCity());
+        existEmployee.setState(employeeRequestDTO.getState());
+        existEmployee.setNumber(employeeRequestDTO.getNumber());
+        existEmployee.setComplement(employeeRequestDTO.getComplement());
+        existEmployee.setShift(employeeRequestDTO.getShift());
+        existEmployee.setTimeMin(employeeRequestDTO.getTimeMin());
+        existEmployee.setTimeMax(employeeRequestDTO.getTimeMax());
+        existEmployee.setWeekDays(WeekDaysUtils.mapWeekDaysFromArray(employeeRequestDTO.getWeekDays()));
+        return employeeRepository.save(existEmployee);
+    }
 }

@@ -8,13 +8,19 @@ import com.ifpr.thread.stilofit.exceptions.NotFoundException;
 import com.ifpr.thread.stilofit.models.Contract;
 import com.ifpr.thread.stilofit.repositories.ContractRepository;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.Pageable;
+
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+
 public class ContractService {
     private final ContractRepository repository;
     private final ContractMapper mapper;
@@ -57,4 +63,11 @@ public class ContractService {
         repository.deleteById(id);
     }
 
+     public Page<Contract> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
+    public Page<Contract> findByName(Pageable pageable, String name) {
+        return repository.findByName(pageable, name);
+    }
 }
