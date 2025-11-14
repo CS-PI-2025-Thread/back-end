@@ -15,7 +15,7 @@ public class ContractMapper {
         contract.setName(dto.getName());
         contract.setStatus(dto.getStatus());
         contract.setTemplate(dto.getTemplate());
-        contract.setInstallmentable(dto.getInstallmentable());
+        contract.setInstallmentable(dto.isInstallmentable());
         contract.setInstallments(dto.getInstallments());
         contract.setTotalValue(dto.getTotalValue());
         contract.setInstallmentsValue(dto.getInstallmentsValue());
@@ -34,7 +34,7 @@ public class ContractMapper {
         dto.setName(contract.getName());
         dto.setStatus(contract.getStatus());
         dto.setTemplate(contract.getTemplate());
-        dto.setInstallmentable(contract.getInstallmentable());
+        dto.setInstallmentable(contract.isInstallmentable());
         dto.setInstallments(contract.getInstallments());
         dto.setTotalValue(contract.getTotalValue());
         dto.setInstallmentsValue(contract.getInstallmentsValue());

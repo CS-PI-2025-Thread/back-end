@@ -24,7 +24,7 @@ public class ContractRequestDTO {
     @NotBlank(message = "{validation.template.notblank}")
     private String template;
 
-    @NotBlank(message = "{validation.installmentable.notnull}")
+    @NotNull(message = "{validation.installmentable.notnull}")
     private boolean installmentable;
 
     private Integer installments;
