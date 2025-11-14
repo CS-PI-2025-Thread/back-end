@@ -29,7 +29,7 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/contracts")
+@RequestMapping("/contracts")
 public class ContractController {
 
     private final ContractService service;
