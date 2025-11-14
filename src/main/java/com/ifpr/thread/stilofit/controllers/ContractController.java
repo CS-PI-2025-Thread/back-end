@@ -49,6 +49,13 @@ public class ContractController {
         return ResponseEntity.ok(service.findById(id));
     }
 
+    @GetMapping("/find-by-name")
+    public ResponseEntity<Page<ContractListDTO>> findByName(@PageableDefault(size = 30, sort = "name", direction = Sort.Direction.ASC) Pageable pageable, @RequestParam(name = "name", required = false, defaultValue = "") String name) {
+        Page<Contract> contracts = service.findByName(pageable, name);
+        Page<ContractListDTO> contractResponses = contracts.map(ContractMapper::toList);
+        return ResponseEntity.ok(contractResponses);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<ContractResponseDTO> update(@PathVariable Long id, @Valid @RequestBody ContractRequestDTO dto) {
         return ResponseEntity.ok(service.update(id, dto));
