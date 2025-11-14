@@ -33,8 +33,8 @@ public class Contract {
     private String template;
 
     @Column(name = "installmentable", length = 10)
-    @NotBlank(message = "{validation.installmentable.notblank}")
-    private String installmentable;
+    @NotNull(message = "{validation.installmentable.notnull}")
+    private boolean installmentable;
 
     @Column(name = "installments")
     private Integer installments;

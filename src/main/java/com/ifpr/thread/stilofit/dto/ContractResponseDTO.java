@@ -13,7 +13,7 @@ public class ContractResponseDTO {
     private String name;
     private ContractStatus status;
     private String template;
-    private String installmentable;
+    private boolean installmentable;
     private Integer installments;
     private Double totalValue;
     private Double installmentsValue;

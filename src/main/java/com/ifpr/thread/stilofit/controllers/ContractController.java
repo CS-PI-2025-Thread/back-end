@@ -44,7 +44,7 @@ public class ContractController {
         return ResponseEntity.ok(service.listAll());
     }
 
-    @GetMapping("/list-by-id/{id}")
+    @GetMapping("/find-by-id/{id}")
     public ResponseEntity<ContractResponseDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
