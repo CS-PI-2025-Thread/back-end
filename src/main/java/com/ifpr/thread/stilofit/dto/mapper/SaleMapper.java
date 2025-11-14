@@ -13,7 +13,7 @@ public class SaleMapper {
         dto.setId(sale.getId());
         dto.setClient(ClientMapper.toList(sale.getClient()));
         dto.setContracts(sale.getContracts().stream()
-                .map(contract -> new ContractMapper().toList(contract))
+                .map(contract -> ContractMapper.toList(contract))
                 .collect(Collectors.toList()));
         dto.setCreatedAt(sale.getCreatedAt());
         dto.setTotalAmount(sale.getTotalAmount());

@@ -23,37 +23,36 @@ import java.util.stream.Collectors;
 
 public class ContractService {
     private final ContractRepository repository;
-    private final ContractMapper mapper;
 
     public ContractResponseDTO create(ContractRequestDTO dto) {
         if (repository.existsByName(dto.getName())) {
             throw new ContractNameAlreadyExistsException("Já existe um contrato com esse nome.");
         }
-        Contract contract = mapper.toEntity(dto);
+        Contract contract = ContractMapper.toEntity(dto);
         contract = repository.save(contract);
-        return mapper.toDTO(contract);
+        return ContractMapper.toDTO(contract);
     }
 
     public List<ContractResponseDTO> listAll() {
         return repository.findAll().stream()
-                .map(mapper::toDTO)
+                .map(ContractMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
     public ContractResponseDTO findById(Long id) {
         Contract contract = repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Contrato não encontrado"));
-        return mapper.toDTO(contract);
+        return ContractMapper.toDTO(contract);
     }
 
     public ContractResponseDTO update(Long id, ContractRequestDTO dto) {
         repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Contrato não encontrado"));
                 
-        Contract updated = mapper.toEntity(dto);
+        Contract updated = ContractMapper.toEntity(dto);
         updated.setId(id);
         updated = repository.save(updated);
-        return mapper.toDTO(updated);
+        return ContractMapper.toDTO(updated);
     }
 
     public void delete(Long id) {

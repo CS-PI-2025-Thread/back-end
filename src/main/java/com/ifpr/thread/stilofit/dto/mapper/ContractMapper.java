@@ -10,7 +10,7 @@ import com.ifpr.thread.stilofit.dto.list.ContractListDTO;
 
 @Component
 public class ContractMapper {
-    public Contract toEntity(ContractRequestDTO dto) {
+    public static Contract toEntity(ContractRequestDTO dto) {
         Contract contract = new Contract();
         contract.setName(dto.getName());
         contract.setStatus(dto.getStatus());
@@ -28,7 +28,7 @@ public class ContractMapper {
         return contract;
     }
 
-    public ContractResponseDTO toDTO(Contract contract) {
+    public static ContractResponseDTO toDTO(Contract contract) {
         ContractResponseDTO dto = new ContractResponseDTO();
         dto.setId(contract.getId());
         dto.setName(contract.getName());
@@ -47,7 +47,7 @@ public class ContractMapper {
         return dto;
     }
 
-        public ContractListDTO toList(Contract contract) {
+    public static ContractListDTO toList(Contract contract) {
         ContractListDTO dto = new ContractListDTO();
         dto.setId(contract.getId());
         dto.setName(contract.getName());
