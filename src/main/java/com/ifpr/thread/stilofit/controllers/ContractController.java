@@ -39,12 +39,12 @@ public class ContractController {
         return ResponseEntity.ok(service.create(dto));
     }
 
-    @GetMapping
+    @GetMapping("/list-all")
     public ResponseEntity<List<ContractResponseDTO>> listAll() {
         return ResponseEntity.ok(service.listAll());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/list-by-id/{id}")
     public ResponseEntity<ContractResponseDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
