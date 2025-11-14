@@ -7,6 +7,9 @@ import lombok.*;
 
 import java.util.List;
 
+import com.ifpr.thread.stilofit.models.enums.ContractStatus;
+import com.ifpr.thread.stilofit.models.enums.TypeExpire;
+
 @Entity
 @Table(name = "contract")
 @Data
@@ -16,19 +19,20 @@ public class Contract {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 100)
+    @Column(name = "name", length = 100)
     @NotBlank(message = "{validation.name.notblank}")
     private String name;
 
-    @Column(name = "status", nullable = false, length = 50)
-    @NotBlank(message = "{validation.status.notblank}")
-    private String status;
+    @Column(name = "status")
+    @NotNull(message = "{validation.status.notnull}")
+    @Enumerated(EnumType.STRING)
+    private ContractStatus status;
 
     @Column(name = "template", columnDefinition = "TEXT")
     @NotBlank(message = "{validation.template.notblank}")
     private String template;
 
-    @Column(name = "installmentable", nullable = false, length = 10)
+    @Column(name = "installmentable", length = 10)
     @NotBlank(message = "{validation.installmentable.notblank}")
     private String installmentable;
 
@@ -47,8 +51,9 @@ public class Contract {
     private Integer expire;
 
     @Column(name = "type_expire", length = 20)
-    @NotBlank(message = "{validation.type_expire.notblank}")
-    private String typeExpire;
+    @NotNull(message = "{validation.type_expire.notblank}")
+    @Enumerated(EnumType.STRING)
+    private TypeExpire typeExpire;
 
     @ElementCollection
     @CollectionTable(
