@@ -1,6 +1,8 @@
 package com.ifpr.thread.stilofit.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
@@ -15,30 +17,37 @@ public class Contract {
     private Long id;
 
     @Column(name = "name", nullable = false, length = 100)
+    @NotBlank(message = "{validation.name.notblank}")
     private String name;
 
     @Column(name = "status", nullable = false, length = 50)
+    @NotBlank(message = "{validation.status.notblank}")
     private String status;
 
     @Column(name = "template", columnDefinition = "TEXT")
+    @NotBlank(message = "{validation.template.notblank}")
     private String template;
 
     @Column(name = "installmentable", nullable = false, length = 10)
+    @NotBlank(message = "{validation.installmentable.notblank}")
     private String installmentable;
 
     @Column(name = "installments")
     private Integer installments;
 
     @Column(name = "total_value")
+    @NotNull(message = "{validation.total_value.notnull}")
     private Double totalValue;
 
     @Column(name = "installment_value")
     private Double installmentsValue;
 
     @Column(name = "expire")
+    @NotNull(message = "{validation.expire.notnull}")
     private Integer expire;
 
     @Column(name = "type_expire", length = 20)
+    @NotBlank(message = "{validation.type_expire.notblank}")
     private String typeExpire;
 
     @ElementCollection

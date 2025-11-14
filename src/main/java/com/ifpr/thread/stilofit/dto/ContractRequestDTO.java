@@ -8,29 +8,29 @@ import java.util.List;
 
 @Data
 public class ContractRequestDTO {
-    @NotBlank
+    @NotBlank(message = "{validation.name.notblank}")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "{validation.status.notnull}")
     private String status;
 
-    @NotBlank
+    @NotBlank(message = "{validation.template.notblank}")
     private String template;
 
-    @NotBlank
+    @NotBlank(message = "{validation.installmentable.notblank}")
     private String installmentable;
 
     private Integer installments;
 
-    @NotNull
+    @NotNull(message = "{validation.total_value.notnull}")
     private Double totalValue;
 
     private Double installmentsValue;
 
-    @NotNull
+    @NotNull(message = "{validation.expire.notnull}")
     private Integer expire;
 
-    @NotBlank
+    @NotBlank(message = "{validation.type_expire.notnull}")
     private String typeExpire;
 
     private List<String> classRoms;
