@@ -62,10 +62,6 @@ public class ContractService {
         repository.deleteById(id);
     }
 
-     public Page<Contract> findAll(Pageable pageable) {
-        return repository.findAll(pageable);
-    }
-
     public Page<Contract> findByName(Pageable pageable, String name) {
         return repository.findByName(pageable, name);
     }
