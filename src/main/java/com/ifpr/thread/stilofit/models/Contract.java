@@ -53,7 +53,7 @@ public class Contract {
     private Integer expire;
 
     @Column(name = "type_expire", length = 20)
-    @NotNull(message = "{validation.type_expire.notblank}")
+    @NotNull(message = "{validation.typeExpire.notnull}")
     @Enumerated(EnumType.STRING)
     private TypeExpire typeExpire;
 

@@ -21,7 +21,7 @@ public class ContractRequestDTO {
     @NotBlank(message = "{validation.name.notblank}")
     private String name;
 
-    @NotBlank(message = "{validation.status.notnull}")
+    @NotNull(message = "{validation.status.notnull}")
     @Enumerated(EnumType.STRING)
     private ContractStatus status;
 
@@ -44,7 +44,7 @@ public class ContractRequestDTO {
     @Positive
     private Integer expire;
 
-    @NotBlank(message = "{validation.type_expire.notnull}")
+    @NotNull(message = "{validation.typeExpire.notnull}")
     @Enumerated(EnumType.STRING)
     private TypeExpire typeExpire;
 
