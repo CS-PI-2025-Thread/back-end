@@ -15,9 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 @RequiredArgsConstructor
 
@@ -34,10 +31,9 @@ public class ContractService {
         return ContractMapper.toDTO(contract);
     }
 
-    public List<ContractListDTO> listAll() {
-        return repository.findAll().stream()
-                .map(ContractMapper::toList)
-                .collect(Collectors.toList());
+    public Page<ContractListDTO> listAll(Pageable pageable) {
+        Page<Contract> contracts = repository.findAll(pageable);
+        return contracts.map(ContractMapper::toList);
     }
 
     public ContractResponseDTO findById(Long id) {

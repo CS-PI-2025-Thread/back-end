@@ -1,7 +1,5 @@
 package com.ifpr.thread.stilofit.controllers;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -40,8 +38,8 @@ public class ContractController {
     }
 
     @GetMapping("/list-all")
-    public ResponseEntity<List<ContractListDTO>> listAll() {
-        return ResponseEntity.ok(service.listAll());
+    public ResponseEntity<Page<ContractListDTO>> listAll(@PageableDefault(size = 30, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
+        return ResponseEntity.ok(service.listAll(pageable));
     }
 
     @GetMapping("/find-by-id/{id}")
