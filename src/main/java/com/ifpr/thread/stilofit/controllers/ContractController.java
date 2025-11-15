@@ -40,7 +40,7 @@ public class ContractController {
     }
 
     @GetMapping("/list-all")
-    public ResponseEntity<List<ContractResponseDTO>> listAll() {
+    public ResponseEntity<List<ContractListDTO>> listAll() {
         return ResponseEntity.ok(service.listAll());
     }
 

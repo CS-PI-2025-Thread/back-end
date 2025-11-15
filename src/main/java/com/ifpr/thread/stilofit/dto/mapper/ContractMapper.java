@@ -52,6 +52,10 @@ public class ContractMapper {
         dto.setId(contract.getId());
         dto.setName(contract.getName());
         dto.setTotalValue(contract.getTotalValue());
+        dto.setInstallments(contract.getInstallments());
+        dto.setInstallmentsValue(contract.getInstallmentsValue());
+        dto.setTypeExpire(contract.getTypeExpire());
+        dto.setExpire(contract.getExpire());
         return dto;
     }
 }

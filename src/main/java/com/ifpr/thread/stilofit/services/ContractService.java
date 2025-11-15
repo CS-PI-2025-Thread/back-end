@@ -3,6 +3,7 @@ package com.ifpr.thread.stilofit.services;
 import com.ifpr.thread.stilofit.dto.ContractRequestDTO;
 import com.ifpr.thread.stilofit.dto.ContractResponseDTO;
 import com.ifpr.thread.stilofit.dto.mapper.ContractMapper;
+import com.ifpr.thread.stilofit.dto.list.ContractListDTO;
 import com.ifpr.thread.stilofit.exceptions.ContractNameAlreadyExistsException;
 import com.ifpr.thread.stilofit.exceptions.NotFoundException;
 import com.ifpr.thread.stilofit.models.Contract;
@@ -14,7 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 
 public class ContractService {
+
     private final ContractRepository repository;
 
     public ContractResponseDTO create(ContractRequestDTO dto) {
@@ -33,9 +34,9 @@ public class ContractService {
         return ContractMapper.toDTO(contract);
     }
 
-    public List<ContractResponseDTO> listAll() {
+    public List<ContractListDTO> listAll() {
         return repository.findAll().stream()
-                .map(ContractMapper::toDTO)
+                .map(ContractMapper::toList)
                 .collect(Collectors.toList());
     }
 
@@ -48,7 +49,7 @@ public class ContractService {
     public ContractResponseDTO update(Long id, ContractRequestDTO dto) {
         repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Contrato não encontrado"));
-                
+
         Contract updated = ContractMapper.toEntity(dto);
         updated.setId(id);
         updated = repository.save(updated);
