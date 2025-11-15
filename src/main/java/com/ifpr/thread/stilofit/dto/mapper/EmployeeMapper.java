@@ -1,3 +1,20 @@
+package com.ifpr.thread.stilofit.dto.list;
+
+import com.ifpr.thread.stilofit.models.enums.Role;
+import com.ifpr.thread.stilofit.models.enums.Shift;
+import com.ifpr.thread.stilofit.models.enums.Status;
+
+import lombok.Data;
+
+@Data
+public class EmployeeListDTO {
+    private Long id;
+    private String name;
+    private Role role;
+    private Status status;
+    private Shift shift;
+}
+
 package com.ifpr.thread.stilofit.dto.mapper;
 
 import com.ifpr.thread.stilofit.dto.EmployeeResponseDTO;
@@ -31,7 +48,7 @@ public class EmployeeMapper {
         dto.setShift(employee.getShift());
         dto.setTimeMin(employee.getTimeMin());
         dto.setTimeMax(employee.getTimeMax());
-        dto.setWeekDays(WeekDaysUtils.mapWeekDaysToArray(employee.getWeekDays())); 
+        dto.setWeekDays(WeekDaysUtils.mapWeekDaysToArray(employee.getWeekDays()));
         return dto;
     }
 
@@ -39,6 +56,9 @@ public class EmployeeMapper {
         EmployeeListDTO dto = new EmployeeListDTO();
         dto.setId(employee.getId());
         dto.setName(employee.getName());
+        dto.setRole(employee.getRole());
+        dto.setStatus(employee.getStatus());
+        dto.setShift(employee.getShift());
         return dto;
     }
 }
