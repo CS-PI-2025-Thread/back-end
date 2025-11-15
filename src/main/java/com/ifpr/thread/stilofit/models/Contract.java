@@ -1,5 +1,7 @@
 package com.ifpr.thread.stilofit.models;
 
+import java.time.LocalTime;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -64,10 +66,10 @@ public class Contract {
     private List<String> classRoms;
 
     @Column(name = "time_min", length = 10)
-    private String timeMin;
+    private LocalTime timeMin;
 
     @Column(name = "time_max", length = 10)
-    private String timeMax;
+    private LocalTime timeMax;
 
     @ElementCollection
     @CollectionTable(

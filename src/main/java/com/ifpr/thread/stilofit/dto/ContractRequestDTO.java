@@ -1,5 +1,7 @@
 package com.ifpr.thread.stilofit.dto;
 
+import java.time.LocalTime;
+
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
@@ -10,6 +12,8 @@ import java.util.List;
 
 import com.ifpr.thread.stilofit.models.enums.ContractStatus;
 import com.ifpr.thread.stilofit.models.enums.TypeExpire;
+
+import jakarta.validation.constraints.Positive;
 
 @Data
 public class ContractRequestDTO {
@@ -30,11 +34,14 @@ public class ContractRequestDTO {
     private Integer installments;
 
     @NotNull(message = "{validation.total_value.notnull}")
+    @Positive
     private Double totalValue;
 
+    @Positive
     private Double installmentsValue;
 
     @NotNull(message = "{validation.expire.notnull}")
+    @Positive
     private Integer expire;
 
     @NotBlank(message = "{validation.type_expire.notnull}")
@@ -42,7 +49,7 @@ public class ContractRequestDTO {
     private TypeExpire typeExpire;
 
     private List<String> classRoms;
-    private String timeMin;
-    private String timeMax;
+    private LocalTime timeMin;
+    private LocalTime timeMax;
     private List<String> weekdays;
 }

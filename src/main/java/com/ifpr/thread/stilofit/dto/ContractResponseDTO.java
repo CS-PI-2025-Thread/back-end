@@ -2,6 +2,7 @@ package com.ifpr.thread.stilofit.dto;
 
 import lombok.Data;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import com.ifpr.thread.stilofit.models.enums.ContractStatus;
@@ -20,7 +21,7 @@ public class ContractResponseDTO {
     private Integer expire;
     private TypeExpire typeExpire;
     private List<String> classRoms;
-    private String timeMin;
-    private String timeMax;
+    private LocalTime timeMin;
+    private LocalTime timeMax;
     private String[] weekdays;
 }
