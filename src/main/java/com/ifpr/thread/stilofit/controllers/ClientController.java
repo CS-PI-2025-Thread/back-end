@@ -20,8 +20,8 @@ import com.ifpr.thread.stilofit.dto.ClientResponseDTO;
 import com.ifpr.thread.stilofit.dto.list.ClientListDTO;
 import com.ifpr.thread.stilofit.dto.mapper.ClientMapper;
 import com.ifpr.thread.stilofit.exceptions.ErrorMessage;
-import com.ifpr.thread.stilofit.services.ClientService;
 import com.ifpr.thread.stilofit.models.Client;
+import com.ifpr.thread.stilofit.services.ClientService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
