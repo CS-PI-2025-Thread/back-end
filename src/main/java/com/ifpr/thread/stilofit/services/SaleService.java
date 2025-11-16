@@ -1,7 +1,5 @@
 package com.ifpr.thread.stilofit.services;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.lang.NonNull;
@@ -32,11 +30,12 @@ public class SaleService {
 
         Client client = clientRepository.findById(saleRequestDTO.getClientId())
                 .orElseThrow(() -> new NotFoundException("Cliente não encontrado com id: " + saleRequestDTO.getClientId()));
-
-        List<Contract> contracts = contractRepository.findAllById(saleRequestDTO.getContractsIds());
+        Contract contract = contractRepository.findById(saleRequestDTO.getContractId())
+                .orElseThrow(() -> new NotFoundException("Contrato não encontrado com id: " + saleRequestDTO.getContractId()));
+                
         Sale sale = new Sale();
         sale.setClient(client);
-        sale.setContracts(contracts);
+        sale.setContract(contract);
         sale.setTotalAmount(saleRequestDTO.getTotalAmount());
         Sale saleSave = saleRepository.save(sale);
         return saleSave;
@@ -62,15 +61,14 @@ public class SaleService {
         validateSaleFields(saleRequestDTO);
         Client client = clientRepository.findById(saleRequestDTO.getClientId())
                 .orElseThrow(() -> new NotFoundException("Cliente não encontrado com id: " + saleRequestDTO.getClientId()));
-
-        List<Contract> contracts = contractRepository.findAllById(saleRequestDTO.getContractsIds());
+        Contract contract = contractRepository.findById(saleRequestDTO.getContractId())
+                .orElseThrow(() -> new NotFoundException("Contrato não encontrado com id: " + saleRequestDTO.getContractId()));
         Sale existSale = saleRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Venda não encontrada com id: " + id));
                 
         existSale.setClient(client);
+        existSale.setContract(contract);
         existSale.setTotalAmount(saleRequestDTO.getTotalAmount());
-        existSale.getContracts().clear();
-        existSale.getContracts().addAll(contracts);
         Sale updateSale = saleRepository.save(existSale);
         return updateSale;
     }
@@ -78,6 +76,9 @@ public class SaleService {
     private void validateSaleFields(SaleRequestDTO saleRequestDTO) {
         if (saleRequestDTO.getClientId() == null) {
             throw new NotBlankException("O campo 'cliente' é obrigatório.");
+        }
+        if (saleRequestDTO.getContractId() == null) {
+            throw new NotBlankException("O campo 'contrato' é obrigatório.");
         }
         if (saleRequestDTO.getTotalAmount() == null || saleRequestDTO.getTotalAmount() <= 0) {
             throw new NotBlankException("O campo 'valor total' é obrigatório, e deve ser positivo");

@@ -30,7 +30,6 @@ import org.springframework.lang.NonNull;
 @AllArgsConstructor
 @RequestMapping("/contracts")
 public class ContractController {
-
     private final ContractService service;
 
     @PostMapping

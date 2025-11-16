@@ -63,7 +63,7 @@ public class SaleController {
         @ApiResponse(responseCode = "404", description = "No sales found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
         @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
     })
-    @GetMapping("/list-all-sales")
+    @GetMapping
     public ResponseEntity<Page<SaleListDTO>> findAll(@NonNull @PageableDefault(size = 30, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Sale> sales = saleService.findAll(pageable);
         Page<SaleListDTO> saleResponses = sales.map(SaleMapper::toList);
