@@ -2,6 +2,7 @@ package com.ifpr.thread.stilofit.services;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.lang.NonNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,7 @@ public class EmployeeService {
         if (employeeRepository.existsByProfessionalRegister(employeeRequestDTO.getProfessionalRegister())) {
             throw new ProfessionalRegisterAlreadyExistsException("Registro profissional já cadastrado");
         }
+
         Employee employee = new Employee();
         employee.setName(employeeRequestDTO.getName());
         employee.setEmail(employeeRequestDTO.getEmail());
@@ -56,18 +58,19 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public Employee findById(Long id) {
+    public Employee findById(@NonNull Long id) {
         return employeeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Funcionário não encontrado"));
     }
 
-    public Page<Employee> findAll(Pageable pageable) {
+    public Page<Employee> findAll(@NonNull Pageable pageable) {
         return employeeRepository.findAll(pageable);
     }
 
-    public Employee update(Long id, EmployeeRequestDTO employeeRequestDTO) {
+    public Employee update(@NonNull Long id, EmployeeRequestDTO employeeRequestDTO) {
         Employee existEmployee = employeeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Funcionário não encontrado com id: " + id));
+                
         existEmployee.setName(employeeRequestDTO.getName());
         existEmployee.setEmail(employeeRequestDTO.getEmail());
         existEmployee.setPassword(passwordEncoder.encode(employeeRequestDTO.getPassword()));

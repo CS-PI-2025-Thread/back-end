@@ -19,5 +19,5 @@ public class ContractResponseDTO {
     private List<String> classRoms;
     private String timeMin;
     private String timeMax;
-    private String[] weekdays;
+    private String[] weekDays;
 }
