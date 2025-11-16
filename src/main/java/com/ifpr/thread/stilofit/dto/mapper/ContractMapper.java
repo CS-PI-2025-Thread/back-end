@@ -7,6 +7,7 @@ import com.ifpr.thread.stilofit.models.Contract;
 import org.springframework.stereotype.Component;
 
 import com.ifpr.thread.stilofit.dto.list.ContractListDTO;
+import com.ifpr.thread.stilofit.utils.WeekDaysUtils;
 
 @Component
 public class ContractMapper {
@@ -24,7 +25,7 @@ public class ContractMapper {
         contract.setClassRoms(dto.getClassRoms());
         contract.setTimeMin(dto.getTimeMin());
         contract.setTimeMax(dto.getTimeMax());
-        contract.setWeekdays(dto.getWeekdays());
+        contract.setWeekDays(WeekDaysUtils.mapWeekDaysFromArray(dto.getWeekDays()));
         return contract;
     }
 
@@ -43,7 +44,7 @@ public class ContractMapper {
         dto.setClassRoms(contract.getClassRoms());
         dto.setTimeMin(contract.getTimeMin());
         dto.setTimeMax(contract.getTimeMax());
-        dto.setWeekdays(contract.getWeekdays() == null ? null : contract.getWeekdays().toArray(new String[0]));
+        dto.setWeekDays(WeekDaysUtils.mapWeekDaysToArray(contract.getWeekDays()));
         return dto;
     }
 

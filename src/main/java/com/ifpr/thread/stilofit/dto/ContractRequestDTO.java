@@ -17,7 +17,6 @@ import jakarta.validation.constraints.Positive;
 
 @Data
 public class ContractRequestDTO {
-
     @NotBlank(message = "{validation.name.notblank}")
     private String name;
 
@@ -51,5 +50,5 @@ public class ContractRequestDTO {
     private List<String> classRoms;
     private LocalTime timeMin;
     private LocalTime timeMax;
-    private List<String> weekdays;
+    private List<String> weekDays;
 }

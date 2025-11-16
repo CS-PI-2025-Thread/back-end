@@ -30,7 +30,7 @@ public class Sale {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_client")
+    @JoinColumn(name = "client_id", nullable = false)
     @NotNull(message = "{validation.client.notnull}")
     private Client client;
 
