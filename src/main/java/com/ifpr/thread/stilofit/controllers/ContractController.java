@@ -5,7 +5,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,11 +24,11 @@ import com.ifpr.thread.stilofit.services.ContractService;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.lang.NonNull;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/contracts")
-@CrossOrigin("http://localhost:5173")
 public class ContractController {
 
     private final ContractService service;
@@ -40,12 +39,12 @@ public class ContractController {
     }
 
     @GetMapping("/list-all")
-    public ResponseEntity<Page<ContractListDTO>> listAll(@PageableDefault(size = 30, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
+    public ResponseEntity<Page<ContractListDTO>> listAll(@NonNull @PageableDefault(size = 30, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
         return ResponseEntity.ok(service.listAll(pageable));
     }
 
-    @GetMapping("/find-by-id/{id}")
-    public ResponseEntity<ContractResponseDTO> findById(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<ContractResponseDTO> findById(@NonNull @PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
@@ -57,12 +56,12 @@ public class ContractController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ContractResponseDTO> update(@PathVariable Long id, @Valid @RequestBody ContractRequestDTO dto) {
+    public ResponseEntity<ContractResponseDTO> update(@NonNull @PathVariable Long id, @Valid @RequestBody ContractRequestDTO dto) {
         return ResponseEntity.ok(service.update(id, dto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@NonNull @PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

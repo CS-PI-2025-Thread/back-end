@@ -71,11 +71,7 @@ public class Contract {
     @Column(name = "time_max", length = 10)
     private LocalTime timeMax;
 
-    @ElementCollection
-    @CollectionTable(
-        name = "contract_weekdays",
-        joinColumns = @JoinColumn(name = "contract_id")
-    )
-    @Column(name = "weekday", length = 20)
-    private List<String> weekdays;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "week_days_id", referencedColumnName = "id")
+    private WeekDays weekDays;
 }

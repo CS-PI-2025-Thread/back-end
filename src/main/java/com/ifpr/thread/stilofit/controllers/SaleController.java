@@ -1,7 +1,7 @@
 package com.ifpr.thread.stilofit.controllers;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,9 +33,7 @@ import lombok.AllArgsConstructor;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/sales")
-@CrossOrigin("http://localhost:5173")
 public class SaleController {
-
     private final SaleService saleService;
 
     @Operation(summary = "Create a new sale", description = "Creates a new sale with the provided details.", responses = {
@@ -54,7 +52,7 @@ public class SaleController {
         @ApiResponse(responseCode = "200", description = "Sale found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SaleResponseDTO.class))),
         @ApiResponse(responseCode = "404", description = "Sale not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),})
     @GetMapping("/{id}")
-    public ResponseEntity<SaleResponseDTO> findById(@PathVariable Long id) {
+    public ResponseEntity<SaleResponseDTO> findById(@NonNull @PathVariable Long id) {
         Sale sale = saleService.findById(id);
         SaleResponseDTO saleResponse = SaleMapper.toResponse(sale);
         return ResponseEntity.ok(saleResponse);
@@ -66,7 +64,7 @@ public class SaleController {
         @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
     })
     @GetMapping("/list-all-sales")
-    public ResponseEntity<Page<SaleListDTO>> findAll(@PageableDefault(size = 30, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+    public ResponseEntity<Page<SaleListDTO>> findAll(@NonNull @PageableDefault(size = 30, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Sale> sales = saleService.findAll(pageable);
         Page<SaleListDTO> saleResponses = sales.map(SaleMapper::toList);
         return ResponseEntity.ok(saleResponses);
@@ -78,7 +76,7 @@ public class SaleController {
         @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
     })
     @GetMapping("/list-by-client/{id}")
-    public ResponseEntity<Page<SaleListDTO>> findByClient(@PathVariable Long id, @PageableDefault(size = 30, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+    public ResponseEntity<Page<SaleListDTO>> findByClient(@NonNull @PathVariable Long id, @NonNull @PageableDefault(size = 30, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Sale> sales = saleService.findByClient(id, pageable);
         Page<SaleListDTO> saleResponses = sales.map(SaleMapper::toList);
         return ResponseEntity.ok(saleResponses);
@@ -92,7 +90,7 @@ public class SaleController {
         @ApiResponse(responseCode = "400", description = "Invalid input data", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
         @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))})
     @PutMapping("/{id}")
-    public ResponseEntity<SaleResponseDTO> update(@PathVariable Long id, @Valid @RequestBody SaleRequestDTO saleRequestDTO) {
+    public ResponseEntity<SaleResponseDTO> update(@NonNull @PathVariable Long id, @Valid @RequestBody SaleRequestDTO saleRequestDTO) {
         Sale updatedSale = saleService.update(id, saleRequestDTO);
         SaleResponseDTO saleResponse = SaleMapper.toResponse(updatedSale);
         return ResponseEntity.ok(saleResponse);
