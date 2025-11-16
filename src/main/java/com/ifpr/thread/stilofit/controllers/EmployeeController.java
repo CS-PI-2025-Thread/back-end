@@ -33,6 +33,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("/employees")
 public class EmployeeController {
+
     private final EmployeeService employeeService;
 
     @Operation(summary = "Create a new client", description = "Creates a new client with the provided details.", responses = {
