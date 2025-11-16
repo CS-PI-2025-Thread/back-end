@@ -34,7 +34,6 @@ import lombok.AllArgsConstructor;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/agreements")
-@CrossOrigin("http://localhost:5173")
 public class AgreementController {
 
     private final AgreementService agreementService;
