@@ -1,5 +1,9 @@
 package com.ifpr.thread.stilofit.controllers;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,18 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
-
 import com.ifpr.thread.stilofit.dto.PromotionRequestDTO;
 import com.ifpr.thread.stilofit.dto.PromotionResponseDTO;
 import com.ifpr.thread.stilofit.dto.list.PromotionListDTO;
 import com.ifpr.thread.stilofit.dto.mapper.PromotionMapper;
 import com.ifpr.thread.stilofit.exceptions.ErrorMessage;
-import com.ifpr.thread.stilofit.services.PromotionService;
 import com.ifpr.thread.stilofit.models.Promotion;
+import com.ifpr.thread.stilofit.services.PromotionService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -35,6 +34,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("/promotions")
 public class PromotionController {
+
     private final PromotionService promotionService;
 
     @Operation(summary = "Create a new promotion", description = "Creates a new promotion with the provided details.", responses = {

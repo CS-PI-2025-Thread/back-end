@@ -5,6 +5,5 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class PromotionListDTO extends DiscountListDTO {
-    
+public class AgreementListDTO extends DiscountListDTO {
 }
