@@ -26,6 +26,7 @@ public class AgreementMapper {
         dto.setDiscountType(agreement.getDiscountType());
         dto.setValue(agreement.getValue());
         dto.setTimesApplied(agreement.getTimesApplied());
+        dto.setPartnersMinimum(agreement.getPartnersMinimum());
         return dto;
     }
 }
